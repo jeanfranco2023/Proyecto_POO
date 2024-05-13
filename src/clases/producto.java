@@ -5,14 +5,14 @@ public class producto {
     int id_producto;
     String nombre_producto;
     double precio;
-    int cantidad;
+    int unidades;
     String marca;
 
-    public producto(int id_producto, String nombre_producto, double precio, int cantidad, String marca) {
+    public producto(int id_producto, String nombre_producto, double precio, int unidades, String marca) {
         this.id_producto = id_producto;
         this.nombre_producto = nombre_producto;
         this.precio = precio;
-        this.cantidad = cantidad;
+        this.unidades = unidades;
         this.marca = marca;
     }
 
@@ -24,8 +24,6 @@ public class producto {
             case "Polos":
                 id_producto = 164587;
                 break;
-            case "Camisas":
-                id_producto = 156423;
             case "Buzos":
                 id_producto = 120058;
                 break;
@@ -34,9 +32,6 @@ public class producto {
                 break;
             case "Casacas":
                 id_producto = 148770;
-                break;
-            case "Chompas":
-                id_producto = 112230;
         }
         return id_producto;
     }
@@ -54,28 +49,21 @@ public class producto {
     }
 
     public double getPrecio() {
-         switch (getNombre_producto()) {
-            case "Pantalon":
-                precio = 98;
-                break;
+        switch (getNombre_producto()) {
             case "Polos":
-                precio = 45;
+                precio = 60.9;
                 break;
-            case "Camisas":
-                precio = 60;
-                break;
-            case "Buzos":
-                precio = 54;
-                break;
-            case "Poleras":
-                precio = 78;
+            case "Pantalones":
+                precio = 160.9;
                 break;
             case "Casacas":
-                precio = 65;
+                precio = 98.9;
                 break;
-            case "Chompas":
-                precio = 57;
-
+            case "Poleras":
+                precio = 95.9;
+                break;
+            case "Buzos":
+                precio = 87.9;
         }
         return precio;
     }
@@ -84,12 +72,12 @@ public class producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getUnidades() {
+        return unidades;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setUnidades(int unidades) {
+        this.unidades = unidades;
     }
 
     public String getMarca() {

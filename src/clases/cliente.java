@@ -1,10 +1,6 @@
 
 package clases;
 
-/**
- *
- * @author PC
- */
 public class cliente {
    String nombre;
    int DNI;

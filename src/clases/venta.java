@@ -1,18 +1,45 @@
 package clases;
 
-public class venta {
+public class venta extends producto {
 
-    int unidades;
-    String producto;
-    String marca;
+    int id_venta;
 
-    public venta(int unidades, String producto, String marca) {
-        this.unidades = unidades;
-        this.producto = producto;
-        this.marca = marca;
+    public venta(int id_venta, int id_producto, String nombre_producto, double precio, int cantidad, String marca) {
+        super(id_producto, nombre_producto, precio, cantidad, marca);
+        this.id_venta = id_venta;
     }
 
-    
+    public int getId_venta() {
+        return id_venta;
+    }
+
+    public void setId_venta(int id_venta) {
+        this.id_venta = id_venta;
+    }
+
+    public int getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(int id_producto) {
+        this.id_producto = id_producto;
+    }
+
+    public String getNombre_producto() {
+        return nombre_producto;
+    }
+
+    public void setNombre_producto(String nombre_producto) {
+        this.nombre_producto = nombre_producto;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
     public int getUnidades() {
         return unidades;
@@ -22,37 +49,13 @@ public class venta {
         this.unidades = unidades;
     }
 
-    public String getProducto() {
-        return producto;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setProducto(String producto) {
-        this.producto = producto;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
-
-    public double precio() {
-        double precio = 0;
-        switch (getProducto()) {
-            case "Polos":
-                precio = 60.9;
-                break;
-            case "Pantalones":
-                precio = 160.9;
-                break;
-            case "Casacas":
-                precio = 98.9;
-                break;
-            case "Poleras":
-                precio = 95.9;
-                break;
-            case "Buzos":
-                precio = 87.9;
-        }
-        return precio;
-    }
-
-    public double subtotal() {
-        return (unidades*precio());
-    }
+    
 
 }

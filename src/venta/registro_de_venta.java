@@ -4,8 +4,11 @@
  */
 package venta;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileOutputStream;
+import javax.swing.UIManager;
 
 /**
  *
@@ -21,9 +24,10 @@ public class registro_de_venta extends javax.swing.JFrame {
     public registro_de_venta() {
         initComponents();
         this.setLocationRelativeTo(null);
-        String ids[] = {"Nombre","DNI", "Telefono", "Producto", "Marca", "N° de unidades"};
+        String ids[] = {"Nombre", "DNI", "Telefono", "Producto", "Marca", "N° de unidades"};
         modelo.setColumnIdentifiers(ids);
         jTable1.setModel(modelo);
+
     }
 
     /**
@@ -57,6 +61,8 @@ public class registro_de_venta extends javax.swing.JFrame {
         jbtnAGREGAR_PEDIDO = new javax.swing.JButton();
         jbtnELIMINAR_FILA = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jbtnGENERAR_BOLETA = new javax.swing.JButton();
+        jbtnSALIR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(680, 540));
@@ -205,6 +211,32 @@ public class registro_de_venta extends javax.swing.JFrame {
         jPanel1.add(jLabel7);
         jLabel7.setBounds(420, 40, 260, 256);
 
+        jbtnGENERAR_BOLETA.setBackground(new java.awt.Color(0, 123, 255));
+        jbtnGENERAR_BOLETA.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jbtnGENERAR_BOLETA.setForeground(new java.awt.Color(0, 0, 0));
+        jbtnGENERAR_BOLETA.setText("Generar boleta");
+        jbtnGENERAR_BOLETA.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbtnGENERAR_BOLETA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGENERAR_BOLETAActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnGENERAR_BOLETA);
+        jbtnGENERAR_BOLETA.setBounds(120, 470, 150, 40);
+
+        jbtnSALIR.setBackground(new java.awt.Color(0, 123, 255));
+        jbtnSALIR.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jbtnSALIR.setForeground(new java.awt.Color(0, 0, 0));
+        jbtnSALIR.setText("Salir");
+        jbtnSALIR.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbtnSALIR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSALIRActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnSALIR);
+        jbtnSALIR.setBounds(370, 470, 150, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,7 +245,7 @@ public class registro_de_venta extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
         );
 
         pack();
@@ -225,19 +257,32 @@ public class registro_de_venta extends javax.swing.JFrame {
 
     private void jbtnAGREGAR_PEDIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAGREGAR_PEDIDOActionPerformed
         // TODO add your handling code here:
+        String confirmacion;
         String nombre = jtxtNOMBRE.getText();
-        int DNI=Integer.valueOf(jtxtDNI.getText());
+        int DNI = Integer.valueOf(jtxtDNI.getText());
         int telefono = Integer.valueOf(jtxtTELEFONO.getText());
         int unidades = Integer.valueOf(jtxtUNIDADES.getText());
         String nombre_producto = jcbxPRODUCTO.getSelectedItem().toString();
-        clases.producto p=new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
-        modelo.addRow(new Object[]{nombre,DNI, telefono, nombre_producto,p.getMarca(), unidades});
-        jtxtTELEFONO.setText("");
-        jtxtDNI.setText("");
-        jcbxPRODUCTO.setSelectedItem(nombre_producto);
-        jtxtNOMBRE.setText("");
-        jtxtUNIDADES.setText("");
-        
+        clases.producto p = new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
+        modelo.addRow(new Object[]{nombre, DNI, telefono, nombre_producto, p.getMarca(), unidades});
+        clases.cliente c = new clases.cliente(nombre, DNI, telefono);
+        confirmacion = JOptionPane.showInputDialog("¿Desea mantener al mismo cliente?\n"
+                + "-Si\n"
+                + "-No");
+        if (confirmacion.equals("si") || confirmacion.equals("Si")) {
+            jtxtNOMBRE.setText(nombre);
+            jtxtTELEFONO.setText("" + c.getTelefono());
+            jtxtDNI.setText("" + c.getDNI());
+            jcbxPRODUCTO.setSelectedItem(0);
+            jtxtUNIDADES.setText("");
+        } else if (confirmacion.equals("No") || confirmacion.equals("no")) {
+            jtxtTELEFONO.setText("");
+            jtxtDNI.setText("");
+            jcbxPRODUCTO.setSelectedItem(0);
+            jtxtNOMBRE.setText("");
+            jtxtUNIDADES.setText("");
+        }
+
     }//GEN-LAST:event_jbtnAGREGAR_PEDIDOActionPerformed
 
     private void jbtnELIMINAR_FILAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnELIMINAR_FILAActionPerformed
@@ -249,11 +294,21 @@ public class registro_de_venta extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnELIMINAR_FILAActionPerformed
 
     private void jbtnELIMINAR_TODOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnELIMINAR_TODOActionPerformed
-                int cant = jTable1.getRowCount();
+        int cant = jTable1.getRowCount();
         for (int i = cant - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }//GEN-LAST:event_jbtnELIMINAR_TODOActionPerformed
+
+    private void jbtnGENERAR_BOLETAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGENERAR_BOLETAActionPerformed
+        // TODO add your handling code here:
+        
+
+    }//GEN-LAST:event_jbtnGENERAR_BOLETAActionPerformed
+
+    private void jbtnSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSALIRActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jbtnSALIRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,20 +320,9 @@ public class registro_de_venta extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registro_de_venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registro_de_venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registro_de_venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registro_de_venta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
         //</editor-fold>
 
@@ -307,6 +351,8 @@ public class registro_de_venta extends javax.swing.JFrame {
     private javax.swing.JButton jbtnAGREGAR_PEDIDO;
     private javax.swing.JButton jbtnELIMINAR_FILA;
     private javax.swing.JButton jbtnELIMINAR_TODO;
+    private javax.swing.JButton jbtnGENERAR_BOLETA;
+    private javax.swing.JButton jbtnSALIR;
     private javax.swing.JComboBox<String> jcbxPRODUCTO;
     private javax.swing.JTextField jtxtDNI;
     private javax.swing.JTextField jtxtNOMBRE;

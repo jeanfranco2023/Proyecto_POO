@@ -17,10 +17,11 @@ public class registro_ventas extends javax.swing.JFrame {
      * Creates new form registro_ventas
      */
     DefaultTableModel modelo = new DefaultTableModel();
+
     public registro_ventas() {
         initComponents();
         this.setLocationRelativeTo(null);
-        String ids[] = {"Nombre","DNI", "Telefono", "Producto", "Marca", "N° de unidades"};
+        String ids[] = {"Nombre", "DNI", "Telefono", "Producto", "Marca", "N° de unidades"};
         modelo.setColumnIdentifiers(ids);
         jTable1.setModel(modelo);
     }
@@ -59,6 +60,7 @@ public class registro_ventas extends javax.swing.JFrame {
         tabla = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jbtnAGREGAR_PEDIDO = new javax.swing.JButton();
+        jbtnSALIR = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtxaBOLETA_EMISION = new javax.swing.JTextArea();
@@ -210,7 +212,7 @@ public class registro_ventas extends javax.swing.JFrame {
         tabla.setViewportView(jTable1);
 
         jPanel3.add(tabla);
-        tabla.setBounds(10, 350, 660, 130);
+        tabla.setBounds(10, 350, 660, 140);
 
         jbtnAGREGAR_PEDIDO.setBackground(new java.awt.Color(0, 123, 255));
         jbtnAGREGAR_PEDIDO.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -224,6 +226,19 @@ public class registro_ventas extends javax.swing.JFrame {
         });
         jPanel3.add(jbtnAGREGAR_PEDIDO);
         jbtnAGREGAR_PEDIDO.setBounds(40, 300, 150, 40);
+
+        jbtnSALIR.setBackground(new java.awt.Color(0, 123, 255));
+        jbtnSALIR.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jbtnSALIR.setForeground(new java.awt.Color(0, 0, 0));
+        jbtnSALIR.setText("Salir");
+        jbtnSALIR.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jbtnSALIR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSALIRActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jbtnSALIR);
+        jbtnSALIR.setBounds(380, 500, 150, 40);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,11 +274,11 @@ public class registro_ventas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
 
         pack();
@@ -271,7 +286,17 @@ public class registro_ventas extends javax.swing.JFrame {
 
     private void jbtnGENERAR_PEDIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGENERAR_PEDIDOActionPerformed
         // TODO add your handling code here:
-        jtxaBOLETA_EMISION.append("                    IMPORTADORA EXPRESS");
+        String nombre = jtxtNOMBRE.getText();
+        int DNI = Integer.parseInt(jtxtDNI.getText());
+        int telefono = Integer.parseInt(jtxtTELEFONO.getText());
+        int unidades = Integer.parseInt(jtxtUNIDADES.getText());
+        String nombre_producto = jcbxPRODUCTO.getSelectedItem().toString();
+        clases.producto p = new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
+        clases.cliente c = new clases.cliente(nombre, DNI, telefono);
+        jtxaBOLETA_EMISION.append("Nombre del cliente:" + nombre);
+        jtxaBOLETA_EMISION.append("DNI:" + DNI);
+        jtxaBOLETA_EMISION.append("Telefono: " + telefono);
+
 
     }//GEN-LAST:event_jbtnGENERAR_PEDIDOActionPerformed
 
@@ -296,32 +321,36 @@ public class registro_ventas extends javax.swing.JFrame {
 
     private void jbtnAGREGAR_PEDIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAGREGAR_PEDIDOActionPerformed
         // TODO add your handling code here:
-                String confirmacion;
+        String confirmacion;
         String nombre = jtxtNOMBRE.getText();
-        int DNI=Integer.valueOf(jtxtDNI.getText());
+        int DNI = Integer.valueOf(jtxtDNI.getText());
         int telefono = Integer.valueOf(jtxtTELEFONO.getText());
         int unidades = Integer.valueOf(jtxtUNIDADES.getText());
         String nombre_producto = jcbxPRODUCTO.getSelectedItem().toString();
-        clases.producto p=new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
-        clases.cliente c=new clases.cliente(nombre, DNI, telefono);
-        modelo.addRow(new Object[]{nombre,DNI, telefono, nombre_producto,p.getMarca(), unidades});
-        confirmacion=JOptionPane.showInputDialog("¿Desea mantener al mismo cliente?\n"
+        clases.producto p = new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
+        clases.cliente c = new clases.cliente(nombre, DNI, telefono);
+        modelo.addRow(new Object[]{nombre, DNI, telefono, nombre_producto, p.getMarca(), unidades});
+        confirmacion = JOptionPane.showInputDialog("¿Desea mantener al mismo cliente?\n"
                 + "-Si\n"
                 + "-No");
-        if(confirmacion.equals("si") || confirmacion.equals("Si")){
+        if (confirmacion.equals("si") || confirmacion.equals("Si")) {
             jtxtNOMBRE.setText(nombre);
-            jtxtTELEFONO.setText(""+c.getTelefono());
-            jtxtDNI.setText(""+c.getDNI());
+            jtxtTELEFONO.setText("" + c.getTelefono());
+            jtxtDNI.setText("" + c.getDNI());
             jcbxPRODUCTO.setSelectedItem(nombre_producto);
             jtxtUNIDADES.setText("");
-        }else if(confirmacion.equals("No")|| confirmacion.equals("no")){
-        jtxtTELEFONO.setText("");
-        jtxtDNI.setText("");
-        jcbxPRODUCTO.setSelectedItem(nombre_producto);
-        jtxtNOMBRE.setText("");
-        jtxtUNIDADES.setText("");
+        } else if (confirmacion.equals("No") || confirmacion.equals("no")) {
+            jtxtTELEFONO.setText("");
+            jtxtDNI.setText("");
+            jcbxPRODUCTO.setSelectedItem(nombre_producto);
+            jtxtNOMBRE.setText("");
+            jtxtUNIDADES.setText("");
         }
     }//GEN-LAST:event_jbtnAGREGAR_PEDIDOActionPerformed
+
+    private void jbtnSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSALIRActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jbtnSALIRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,6 +410,7 @@ public class registro_ventas extends javax.swing.JFrame {
     private javax.swing.JButton jbtnELIMINAR_FILA;
     private javax.swing.JButton jbtnELIMINAR_TODO;
     private javax.swing.JButton jbtnGENERAR_PEDIDO;
+    private javax.swing.JButton jbtnSALIR;
     private javax.swing.JComboBox<String> jcbxPRODUCTO;
     private javax.swing.JTextArea jtxaBOLETA_EMISION;
     private javax.swing.JTextField jtxtDNI;
