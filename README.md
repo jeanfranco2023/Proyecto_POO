@@ -1,5 +1,5 @@
 ﻿# Proyecto_POO
-integrates:
+integrates:   
 Quispe Zarzo, Jean Franco   
 Noroña Mendoza, Felipe   
 Rodríguez Benavides, Luis Mauricio   
