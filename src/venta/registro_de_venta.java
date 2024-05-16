@@ -76,32 +76,32 @@ public class registro_de_venta extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("IMPORTADORA EXPRESS");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 0, 620, 80);
+        jLabel1.setBounds(10, -10, 620, 80);
 
         jLabel2.setFont(new java.awt.Font("High Tower Text", 1, 18)); // NOI18N
         jLabel2.setText("N° de unidades");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(90, 260, 130, 30);
+        jLabel2.setBounds(30, 260, 130, 30);
 
         jLabel3.setFont(new java.awt.Font("High Tower Text", 1, 18)); // NOI18N
         jLabel3.setText("Nombre");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(90, 100, 80, 30);
+        jLabel3.setBounds(30, 90, 80, 30);
 
         jLabel4.setFont(new java.awt.Font("High Tower Text", 1, 18)); // NOI18N
         jLabel4.setText("Telefono");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(90, 140, 80, 30);
+        jLabel4.setBounds(30, 130, 80, 30);
 
         jLabel5.setFont(new java.awt.Font("High Tower Text", 1, 18)); // NOI18N
         jLabel5.setText("DNI");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(90, 180, 80, 30);
+        jLabel5.setBounds(30, 170, 80, 30);
 
         jLabel6.setFont(new java.awt.Font("High Tower Text", 1, 18)); // NOI18N
         jLabel6.setText("Producto");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(90, 220, 80, 30);
+        jLabel6.setBounds(30, 220, 80, 30);
 
         jtxtNOMBRE.setBackground(new java.awt.Color(0, 123, 255));
         jtxtNOMBRE.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
@@ -113,43 +113,43 @@ public class registro_de_venta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jtxtNOMBRE);
-        jtxtNOMBRE.setBounds(230, 90, 240, 30);
+        jtxtNOMBRE.setBounds(170, 80, 330, 30);
 
         jtxtTELEFONO.setBackground(new java.awt.Color(0, 123, 255));
         jtxtTELEFONO.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
         jtxtTELEFONO.setForeground(new java.awt.Color(0, 0, 0));
         jtxtTELEFONO.setBorder(null);
         jPanel1.add(jtxtTELEFONO);
-        jtxtTELEFONO.setBounds(230, 130, 240, 30);
+        jtxtTELEFONO.setBounds(170, 120, 330, 30);
 
         jtxtDNI.setBackground(new java.awt.Color(0, 123, 255));
         jtxtDNI.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
         jtxtDNI.setForeground(new java.awt.Color(0, 0, 0));
         jtxtDNI.setBorder(null);
         jPanel1.add(jtxtDNI);
-        jtxtDNI.setBounds(230, 170, 240, 30);
+        jtxtDNI.setBounds(170, 160, 330, 30);
 
         jtxtUNIDADES.setBackground(new java.awt.Color(0, 123, 255));
         jtxtUNIDADES.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
         jtxtUNIDADES.setForeground(new java.awt.Color(0, 0, 0));
         jtxtUNIDADES.setBorder(null);
         jPanel1.add(jtxtUNIDADES);
-        jtxtUNIDADES.setBounds(230, 250, 240, 30);
+        jtxtUNIDADES.setBounds(170, 250, 330, 30);
 
         jcbxPRODUCTO.setBackground(new java.awt.Color(0, 123, 255));
         jcbxPRODUCTO.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
         jcbxPRODUCTO.setForeground(new java.awt.Color(0, 0, 0));
         jcbxPRODUCTO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pantalon", "Polos", "Buzos", "Poleras", "Casacas" }));
         jPanel1.add(jcbxPRODUCTO);
-        jcbxPRODUCTO.setBounds(230, 220, 240, 30);
+        jcbxPRODUCTO.setBounds(170, 210, 330, 40);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(230, 280, 240, 10);
+        jSeparator1.setBounds(170, 280, 330, 10);
         jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(230, 120, 240, 10);
+        jSeparator2.setBounds(170, 110, 330, 10);
         jPanel1.add(jSeparator3);
-        jSeparator3.setBounds(230, 160, 240, 10);
+        jSeparator3.setBounds(170, 150, 330, 10);
         jPanel1.add(jSeparator4);
-        jSeparator4.setBounds(230, 200, 240, 10);
+        jSeparator4.setBounds(170, 190, 330, 10);
 
         jTable1.setBackground(new java.awt.Color(0, 123, 255));
         jTable1.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -167,7 +167,7 @@ public class registro_de_venta extends javax.swing.JFrame {
         tabla.setViewportView(jTable1);
 
         jPanel1.add(tabla);
-        tabla.setBounds(10, 300, 940, 110);
+        tabla.setBounds(10, 330, 940, 160);
 
         jbtnELIMINAR_TODO.setBackground(new java.awt.Color(0, 123, 255));
         jbtnELIMINAR_TODO.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -180,7 +180,7 @@ public class registro_de_venta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtnELIMINAR_TODO);
-        jbtnELIMINAR_TODO.setBounds(520, 190, 150, 40);
+        jbtnELIMINAR_TODO.setBounds(530, 170, 150, 40);
 
         jbtnAGREGAR_PEDIDO.setBackground(new java.awt.Color(0, 123, 255));
         jbtnAGREGAR_PEDIDO.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -193,7 +193,7 @@ public class registro_de_venta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtnAGREGAR_PEDIDO);
-        jbtnAGREGAR_PEDIDO.setBounds(520, 90, 150, 40);
+        jbtnAGREGAR_PEDIDO.setBounds(530, 70, 150, 40);
 
         jbtnELIMINAR_FILA.setBackground(new java.awt.Color(0, 123, 255));
         jbtnELIMINAR_FILA.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -206,7 +206,7 @@ public class registro_de_venta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtnELIMINAR_FILA);
-        jbtnELIMINAR_FILA.setBounds(520, 140, 150, 40);
+        jbtnELIMINAR_FILA.setBounds(530, 120, 150, 40);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/venta/registro-en-linea (1).png"))); // NOI18N
         jPanel1.add(jLabel7);
@@ -223,7 +223,7 @@ public class registro_de_venta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtnGENERAR_BOLETA);
-        jbtnGENERAR_BOLETA.setBounds(520, 240, 150, 40);
+        jbtnGENERAR_BOLETA.setBounds(530, 220, 150, 40);
 
         jbtnSALIR.setBackground(new java.awt.Color(0, 123, 255));
         jbtnSALIR.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
@@ -236,7 +236,7 @@ public class registro_de_venta extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtnSALIR);
-        jbtnSALIR.setBounds(500, 480, 150, 40);
+        jbtnSALIR.setBounds(530, 270, 150, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,7 +246,7 @@ public class registro_de_venta extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
 
         pack();
