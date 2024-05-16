@@ -257,7 +257,7 @@ public class registro_de_venta extends javax.swing.JFrame {
 
     private void jbtnAGREGAR_PEDIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAGREGAR_PEDIDOActionPerformed
         // TODO add your handling code here:
-        String confirmacion;
+        int confirmacion;
         String nombre = jtxtNOMBRE.getText();
         int DNI = Integer.valueOf(jtxtDNI.getText());
         int telefono = Integer.valueOf(jtxtTELEFONO.getText());
@@ -266,16 +266,15 @@ public class registro_de_venta extends javax.swing.JFrame {
         clases.producto p = new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
         modelo.addRow(new Object[]{nombre, DNI, telefono, nombre_producto, p.getMarca(), unidades});
         clases.cliente c = new clases.cliente(nombre, DNI, telefono);
-        confirmacion = JOptionPane.showInputDialog("¿Desea mantener al mismo cliente?\n"
-                + "-Si\n"
-                + "-No");
-        if (confirmacion.equals("si") || confirmacion.equals("Si")) {
+        String arreglo[]={"Si","No"};
+        confirmacion = JOptionPane.showOptionDialog(null,"¿Desea mantener al mismo cliente?","elige una opcion",0,JOptionPane.QUESTION_MESSAGE,null,arreglo,"Si");
+        if (confirmacion==1) {
             jtxtNOMBRE.setText(nombre);
             jtxtTELEFONO.setText("" + c.getTelefono());
             jtxtDNI.setText("" + c.getDNI());
             jcbxPRODUCTO.setSelectedItem(0);
             jtxtUNIDADES.setText("");
-        } else if (confirmacion.equals("No") || confirmacion.equals("no")) {
+        } else if (confirmacion==2) {
             jtxtTELEFONO.setText("");
             jtxtDNI.setText("");
             jcbxPRODUCTO.setSelectedItem(0);
@@ -313,26 +312,6 @@ public class registro_de_venta extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new registro_de_venta().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
