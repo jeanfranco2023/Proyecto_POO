@@ -50,7 +50,7 @@ public class boleta_emision extends javax.swing.JFrame {
         jScrollPane1.setBounds(20, 20, 410, 420);
 
         jButton1.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
-        jButton1.setText("Generar boleta");
+        jButton1.setText("Emitir pdf");
         jPanel1.add(jButton1);
         jButton1.setBounds(140, 450, 160, 40);
 

@@ -4,8 +4,10 @@
  */
 package login;
 
+import clases.vendedor;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -15,9 +17,6 @@ import javax.swing.UIManager;
  */
 public class login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form login
-     */
     public login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -133,6 +132,7 @@ public class login extends javax.swing.JFrame {
 
         jpsPASSWORD.setBackground(new java.awt.Color(204, 204, 255));
         jpsPASSWORD.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
+        jpsPASSWORD.setForeground(new java.awt.Color(0, 0, 0));
         jpsPASSWORD.setBorder(null);
         jPanel3.add(jpsPASSWORD);
         jpsPASSWORD.setBounds(120, 390, 220, 30);
@@ -154,8 +154,16 @@ public class login extends javax.swing.JFrame {
 
     private void jbtnINICIARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnINICIARActionPerformed
         // TODO add your handling code here:
+        String usuarios = jtxtUSUARIO.getText();
         String pas = new String(jpsPASSWORD.getPassword());
-        if (jtxtUSUARIO.getText().equals("admin") && pas.equals("123456")) {
+        ArrayList<String> usuario = new ArrayList<>();
+        usuario.add("jquispeza");
+        usuario.add("gcorreaar");
+        ArrayList<String> contraseña = new ArrayList<>();
+        contraseña.add("73602652");
+        contraseña.add("73602651");
+
+        if (usuario.contains(usuarios) && contraseña.contains(pas)) {
             venta.registro_de_venta registro = new venta.registro_de_venta();
             registro.setVisible(true);
             this.dispose();

@@ -272,15 +272,15 @@ public class registro_de_venta extends javax.swing.JFrame {
         if (confirmacion==0) {
             jtxtNOMBRE.setText(nombre);
             jtxtTELEFONO.setText("" + c.getTelefono());
-            jtxtDNI.setText("" + c.getDNI());
+            jtxtDNI.setText(""+c.getDNI());
             jcbxPRODUCTO.setSelectedItem(0);
-            jtxtUNIDADES.setText("");
+            jtxtUNIDADES.setText(null);
         } else if (confirmacion==1) {
-            jtxtTELEFONO.setText("");
-            jtxtDNI.setText("");
+            jtxtTELEFONO.setText(null);
+            jtxtDNI.setText(null);
             jcbxPRODUCTO.setSelectedItem(0);
-            jtxtNOMBRE.setText("");
-            jtxtUNIDADES.setText("");
+            jtxtNOMBRE.setText( null);
+            jtxtUNIDADES.setText(null);
         }
 
     }//GEN-LAST:event_jbtnAGREGAR_PEDIDOActionPerformed
