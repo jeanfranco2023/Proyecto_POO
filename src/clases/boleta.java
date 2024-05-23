@@ -34,6 +34,7 @@ public class boleta extends venta {
     }
 
     public void generar_factura() {
+        String cadena="";
         
     }
 

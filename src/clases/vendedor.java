@@ -11,8 +11,8 @@ public class vendedor extends boleta {
     protected int DNI_vendedor;
     private String usuario;
     private String contraseña;
+    protected String correo;
 
-    
     public vendedor(String nombre_vendedor, int id_vendedor, int edad_vendedor, int DNI_vendedor, String usuario, String contraseña, int ruc, int id_venta, int id_producto, String nombre_producto, double precio, int cantidad, String marca) {
         super(ruc, id_venta, id_producto, nombre_producto, precio, cantidad, marca);
         this.nombre_vendedor = nombre_vendedor;
@@ -22,7 +22,6 @@ public class vendedor extends boleta {
         this.usuario = usuario;
         this.contraseña = contraseña;
     }
-
 
     protected String getNombre_vendedor() {
         return "Pedro Martinez";
@@ -62,7 +61,11 @@ public class vendedor extends boleta {
 
     public List<String> getUsuario() {
         List<String> usuario = new ArrayList<>();
-        usuario.add( "jquispeza");
+        usuario.add("jquispeza");
+        usuario.add("gcorreaar");
+        usuario.add("lbenavidesro");
+        usuario.add("jriojaor");
+        usuario.add("fnoroñame");
         //usuario.add(2, "gcorreaar");
         return usuario;
     }
@@ -73,19 +76,52 @@ public class vendedor extends boleta {
 
     public List<String> getContraseña() {
         List<String> contraseña = new ArrayList<>();
-        contraseña.add( "73602652");
-        //contraseña.add(2, "73602651");
+        if (usuario.contains("jquispeza")) {
+            contraseña.add("73602652");
+        } else if (usuario.contains("gcorreaar")) {
+            contraseña.add("75314862");
+        } else if (usuario.contains("lbenavidesro")) {
+            contraseña.add("73705161");
+        } else if (usuario.contains("lbenavidesro")) {
+            contraseña.add("75037790");
+        }else if(usuario.contains("fnoroñame")){
+        contraseña.add("73602651");
+        }
         return contraseña;
     }
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
+
+    public String getCorreo() {
+        switch (usuario) {
+            case "jquispeza":
+                correo = "U22311256@utp.edu.pe";
+                break;
+            case "gcorrear":
+                correo = "U22302979@utp.edu.pe";
+                break;
+            case "lbenavidesro":
+                correo = "U223113111@utp.edu.pe";
+                break;
+            case "jriojaor":
+                correo = "U22237639@utp.edu.pe";
+                break;
+            case "fnoroñame":
+                correo="U18103831@utp.edu.pe";
+        }
+
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public void emitir_factura() {
-        String cadena="";
-        cadena+="Nombre del trabajador: " + getNombre_vendedor() + "\n"
+        String cadena = "";
+        cadena += "Nombre del trabajador: " + getNombre_vendedor() + "\n"
                 + "ID del trabajador: " + getId_vendedor();
         generar_factura();
 

@@ -2,11 +2,10 @@ package login;
 
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
 
-
 public class acceso_login {
 
     public static void main(String[] args) {
-       try {
+        try {
             FlatGradiantoDeepOceanIJTheme.setup();
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");

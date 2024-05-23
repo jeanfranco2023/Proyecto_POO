@@ -10,6 +10,7 @@ import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import recuperar_contraseña.contraseña_recuperar;
 
 /**
  *
@@ -20,6 +21,9 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel7, "src/login/fondo.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel4, "src/login/perfil.png");
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel6, "src/login/agregar-usuario.png");
     }
 
     /**
@@ -36,7 +40,6 @@ public class login extends javax.swing.JFrame {
         jtxtUSUARIO = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jbtnINICIAR = new javax.swing.JButton();
-        jbtnSALIR = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
@@ -44,23 +47,28 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jpsPASSWORD = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jbtnREGISTRARSE = new javax.swing.JButton();
+        jbtnRECUPERAR_CONTRASEÑA = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(410, 550));
+        setMinimumSize(new java.awt.Dimension(821, 555));
         getContentPane().setLayout(null);
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 0, 102));
         jPanel3.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel1.setText("ACCESO");
+        jLabel1.setText("para iniciar");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(110, 10, 190, 60);
+        jLabel1.setBounds(260, 70, 200, 60);
 
-        jtxtUSUARIO.setBackground(new java.awt.Color(204, 204, 255));
+        jtxtUSUARIO.setBackground(new java.awt.Color(0, 0, 102));
         jtxtUSUARIO.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
-        jtxtUSUARIO.setForeground(new java.awt.Color(0, 0, 0));
+        jtxtUSUARIO.setForeground(new java.awt.Color(108, 117, 125));
         jtxtUSUARIO.setBorder(null);
         jtxtUSUARIO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,17 +76,17 @@ public class login extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jtxtUSUARIO);
-        jtxtUSUARIO.setBounds(120, 310, 210, 30);
+        jtxtUSUARIO.setBounds(230, 200, 290, 30);
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 255));
         jLabel2.setText("Usuario");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(170, 290, 80, 22);
+        jLabel2.setBounds(120, 210, 80, 22);
 
-        jbtnINICIAR.setBackground(new java.awt.Color(204, 204, 255));
+        jbtnINICIAR.setBackground(new java.awt.Color(0, 0, 102));
         jbtnINICIAR.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
-        jbtnINICIAR.setForeground(new java.awt.Color(0, 0, 0));
+        jbtnINICIAR.setForeground(new java.awt.Color(108, 117, 125));
         jbtnINICIAR.setText("Iniciar sesión");
         jbtnINICIAR.setBorder(null);
         jbtnINICIAR.addActionListener(new java.awt.event.ActionListener() {
@@ -87,66 +95,81 @@ public class login extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jbtnINICIAR);
-        jbtnINICIAR.setBounds(120, 430, 160, 40);
-
-        jbtnSALIR.setBackground(new java.awt.Color(204, 204, 255));
-        jbtnSALIR.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
-        jbtnSALIR.setForeground(new java.awt.Color(0, 0, 0));
-        jbtnSALIR.setText("Salir");
-        jbtnSALIR.setBorder(null);
-        jbtnSALIR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSALIRActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jbtnSALIR);
-        jbtnSALIR.setBounds(170, 470, 60, 30);
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/grupo (2).png"))); // NOI18N
+        jbtnINICIAR.setBounds(70, 380, 420, 40);
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(70, 60, 256, 220);
+        jLabel4.setBounds(30, 10, 140, 130);
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel3.add(jSeparator1);
-        jSeparator1.setBounds(120, 340, 210, 20);
+        jSeparator1.setBounds(230, 230, 290, 20);
 
         jLabel5.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 255));
         jLabel5.setText("Password");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(170, 360, 100, 22);
+        jLabel5.setBounds(110, 300, 100, 22);
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel3.add(jSeparator2);
-        jSeparator2.setBounds(120, 420, 210, 20);
+        jSeparator2.setBounds(230, 320, 290, 20);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/llave (1).png"))); // NOI18N
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(70, 380, 40, 40);
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/usuario-de-perfil (1).png"))); // NOI18N
+        jLabel3.setBounds(50, 290, 40, 40);
         jPanel3.add(jLabel6);
-        jLabel6.setBounds(70, 300, 40, 40);
+        jLabel6.setBounds(50, 200, 40, 40);
 
-        jpsPASSWORD.setBackground(new java.awt.Color(204, 204, 255));
+        jpsPASSWORD.setBackground(new java.awt.Color(0, 0, 102));
         jpsPASSWORD.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
-        jpsPASSWORD.setForeground(new java.awt.Color(0, 0, 0));
+        jpsPASSWORD.setForeground(new java.awt.Color(108, 117, 125));
         jpsPASSWORD.setBorder(null);
         jPanel3.add(jpsPASSWORD);
-        jpsPASSWORD.setBounds(120, 390, 220, 30);
+        jpsPASSWORD.setBounds(230, 290, 290, 30);
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(570, 0, 260, 530);
+
+        jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel9.setText("Ingrese sus datos");
+        jPanel3.add(jLabel9);
+        jLabel9.setBounds(210, 10, 300, 60);
+
+        jbtnREGISTRARSE.setBackground(new java.awt.Color(0, 0, 102));
+        jbtnREGISTRARSE.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
+        jbtnREGISTRARSE.setForeground(new java.awt.Color(108, 117, 125));
+        jbtnREGISTRARSE.setText("Registrarse");
+        jbtnREGISTRARSE.setBorder(null);
+        jbtnREGISTRARSE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnREGISTRARSEActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jbtnREGISTRARSE);
+        jbtnREGISTRARSE.setBounds(70, 450, 420, 40);
+
+        jbtnRECUPERAR_CONTRASEÑA.setBackground(new java.awt.Color(0, 0, 102));
+        jbtnRECUPERAR_CONTRASEÑA.setText("¿Olvidaste tu contraseña?");
+        jbtnRECUPERAR_CONTRASEÑA.setBorder(null);
+        jbtnRECUPERAR_CONTRASEÑA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRECUPERAR_CONTRASEÑAActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jbtnRECUPERAR_CONTRASEÑA);
+        jbtnRECUPERAR_CONTRASEÑA.setBounds(370, 330, 150, 24);
+
+        jLabel10.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
+        jLabel10.setText("¿No te encuentras registrado? Registrate");
+        jPanel3.add(jLabel10);
+        jLabel10.setBounds(150, 420, 270, 30);
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, 0, 410, 550);
+        jPanel3.setBounds(0, 0, 880, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbtnSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSALIRActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jbtnSALIRActionPerformed
 
     private void jtxtUSUARIOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUSUARIOActionPerformed
         // TODO add your handling code here:
@@ -156,13 +179,11 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuarios = jtxtUSUARIO.getText();
         String pas = new String(jpsPASSWORD.getPassword());
+        vendedor ven = new vendedor(usuarios, ERROR, HAND_CURSOR, ERROR, usuarios, pas, ERROR, WIDTH, WIDTH, usuarios, ERROR, WIDTH, pas);
         ArrayList<String> usuario = new ArrayList<>();
-        usuario.add("jquispeza");
-        usuario.add("gcorreaar");
+        usuario.addAll(ven.getUsuario());
         ArrayList<String> contraseña = new ArrayList<>();
-        contraseña.add("73602652");
-        contraseña.add("73602651");
-
+        contraseña.addAll(ven.getContraseña());
         if (usuario.contains(usuarios) && contraseña.contains(pas)) {
             venta.registro_de_venta registro = new venta.registro_de_venta();
             registro.setVisible(true);
@@ -174,22 +195,38 @@ public class login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtnINICIARActionPerformed
 
+    private void jbtnREGISTRARSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnREGISTRARSEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnREGISTRARSEActionPerformed
+
+    private void jbtnRECUPERAR_CONTRASEÑAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRECUPERAR_CONTRASEÑAActionPerformed
+        // TODO add your handling code here:
+        recuperar_contraseña.contraseña_recuperar contraseña = new recuperar_contraseña.contraseña_recuperar();
+        contraseña.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jbtnRECUPERAR_CONTRASEÑAActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbtnINICIAR;
-    private javax.swing.JButton jbtnSALIR;
+    private javax.swing.JButton jbtnRECUPERAR_CONTRASEÑA;
+    private javax.swing.JButton jbtnREGISTRARSE;
     private javax.swing.JPasswordField jpsPASSWORD;
     private javax.swing.JTextField jtxtUSUARIO;
     // End of variables declaration//GEN-END:variables
