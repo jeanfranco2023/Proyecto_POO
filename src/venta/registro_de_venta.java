@@ -4,10 +4,17 @@
  */
 package venta;
 
+import clases.vendedor;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.UIManager;
 
 /**
@@ -19,12 +26,18 @@ public class registro_de_venta extends javax.swing.JFrame {
     /**
      * Creates new form registro_de_venta
      */
+    DecimalFormat df = new DecimalFormat("#.00");
     DefaultTableModel modelo = new DefaultTableModel();
+    protected ArrayList<Object> producto = new ArrayList<>();
+    protected ArrayList<Object> marca = new ArrayList<>();
+    protected ArrayList<Object> n_unidades = new ArrayList<>();
+    protected ArrayList<Object> subtotal = new ArrayList<>();
+    public double suma_subtotal = 0;
 
     public registro_de_venta() {
         initComponents();
         this.setLocationRelativeTo(null);
-        String ids[] = {"Nombre", "DNI", "Telefono", "Producto", "Marca", "N° de unidades"};
+        String ids[] = {"Nombre", "DNI", "Telefono", "Producto", "Marca", "N° de unidades", "Subtotal"};
         modelo.setColumnIdentifiers(ids);
         jTable1.setModel(modelo);
 
@@ -260,29 +273,30 @@ public class registro_de_venta extends javax.swing.JFrame {
         // TODO add your handling code here:
         int confirmacion;
         String nombre = jtxtNOMBRE.getText();
-        int DNI = Integer.valueOf(jtxtDNI.getText());
-        int telefono = Integer.valueOf(jtxtTELEFONO.getText());
-        int unidades = Integer.valueOf(jtxtUNIDADES.getText());
+        int DNI = Integer.parseInt(jtxtDNI.getText());
+        int telefono = Integer.parseInt(jtxtTELEFONO.getText());
+        int unidades = Integer.parseInt(jtxtUNIDADES.getText());
         String nombre_producto = jcbxPRODUCTO.getSelectedItem().toString();
         clases.producto p = new clases.producto(telefono, nombre_producto, DNI, unidades, nombre);
-        modelo.addRow(new Object[]{nombre, DNI, telefono, nombre_producto, p.getMarca(), unidades});
+        vendedor v = new vendedor(nombre_producto, ERROR, HAND_CURSOR, unidades, nombre, nombre, nombre, DNI, DNI, telefono, nombre_producto, DNI, unidades, nombre);
+        modelo.addRow(new Object[]{nombre, DNI, telefono, nombre_producto, p.getMarca(), unidades, "S/. " + df.format(v.calcular())});
+        suma_subtotal += v.calcular();
         clases.cliente c = new clases.cliente(nombre, DNI, telefono);
-        String arreglo[]={"Si","No"};
-        confirmacion = JOptionPane.showOptionDialog(null,"¿Desea mantener al mismo cliente?","elige una opcion",0,JOptionPane.QUESTION_MESSAGE,null,arreglo,"Si");
-        if (confirmacion==0) {
+        String arreglo[] = {"Si", "No"};
+        confirmacion = JOptionPane.showOptionDialog(null, "¿Desea mantener al mismo cliente?", "elige una opcion", 0, JOptionPane.QUESTION_MESSAGE, null, arreglo, "Si");
+        if (confirmacion == 0) {
             jtxtNOMBRE.setText(nombre);
             jtxtTELEFONO.setText("" + c.getTelefono());
-            jtxtDNI.setText(""+c.getDNI());
+            jtxtDNI.setText("" + c.getDNI());
             jcbxPRODUCTO.setSelectedItem(0);
             jtxtUNIDADES.setText(null);
-        } else if (confirmacion==1) {
+        } else if (confirmacion == 1) {
             jtxtTELEFONO.setText(null);
             jtxtDNI.setText(null);
             jcbxPRODUCTO.setSelectedItem(0);
-            jtxtNOMBRE.setText( null);
+            jtxtNOMBRE.setText(null);
             jtxtUNIDADES.setText(null);
         }
-
     }//GEN-LAST:event_jbtnAGREGAR_PEDIDOActionPerformed
 
     private void jbtnELIMINAR_FILAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnELIMINAR_FILAActionPerformed
@@ -299,13 +313,76 @@ public class registro_de_venta extends javax.swing.JFrame {
             modelo.removeRow(i);
         }
     }//GEN-LAST:event_jbtnELIMINAR_TODOActionPerformed
+    public double IGV() {
+        return suma_subtotal * 0.18;
+    }
+
+    protected double descuento() {
+        double descuento;
+        if (suma_subtotal < 500) {
+            descuento = 40;
+        } else if (suma_subtotal < 1000) {
+            descuento = 80;
+        } else {
+            descuento = 150;
+        }
+        return descuento;
+    }
 
     private void jbtnGENERAR_BOLETAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGENERAR_BOLETAActionPerformed
         // TODO add your handling code here:
-        
 
+        for (int j = 0; j < modelo.getRowCount(); j++) {
+            producto.add(modelo.getValueAt(j, 3));
+            marca.add(modelo.getValueAt(j, 4));
+            n_unidades.add(modelo.getValueAt(j, 5));
+            subtotal.add(modelo.getValueAt(j, 6));
+        }
+        String nombre = jtxtNOMBRE.getText();
+        int DNI = Integer.parseInt(jtxtDNI.getText());
+        int telefono = Integer.parseInt(jtxtTELEFONO.getText());
+        vendedor v = new vendedor(nombre, ERROR, HAND_CURSOR, DNI, nombre, nombre, nombre, DNI, DNI, telefono, nombre, suma_subtotal, DNI, nombre);
+
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        StringBuilder contenidoHTML = new StringBuilder();
+        contenidoHTML.append("<html><head><style>body {text-align: center;}</style><title>REPORTE DE FACTURA</title></head><body>");
+        contenidoHTML.append("<h2>IMPORTADORA EXPRESS</h2>");
+        contenidoHTML.append("<img src=\"file:///C:/Users//PC//OneDrive - Universidad Tecnologica del Peru//4 ciclo//POO//IMAGENES_PROYECTO//IMPORTADORA_EXPRESS.png\" alt=\"Foto del logo\" width=\"200\" height=\"200\">");
+        contenidoHTML.append("<p>Id de la compra: ").append(v.getId_venta()).append("</p>");
+        contenidoHTML.append("<p>Nombre del trabajador: ").append(v.getNombre_vendedor()).append("</p>");
+        contenidoHTML.append("<p>DNI del trabajador: ").append(v.getDNI_vendedor()).append("</p>");
+        contenidoHTML.append("<p>Código del trabajador: ").append(v.getId_vendedor()).append("</p>");
+        contenidoHTML.append("<p>Nombre del cliente: ").append(nombre).append(" ").append("</p>");
+        contenidoHTML.append("<p>Número de DNI del cliente: ").append(DNI).append("</p>");
+        contenidoHTML.append("<p>Detalle de la compra:</p>");
+
+        contenidoHTML.append("<table style=\"width: 30ch; border-collapse: collapse; margin: auto;\">");
+        contenidoHTML.append("<tr style=\"border-bottom: 1px solid black;\"><th style=\"text-align: center;\">Nombre del Producto</th><th style=\"text-align: center;\">Marca</th><th style=\"text-align: center;\">Cantidad</th></tr>");
+
+        for (int i = 0; i < producto.size(); i++) {
+            contenidoHTML.append("<tr>");
+            contenidoHTML.append("<td style=\"text-align: center;\">").append(producto.get(i)).append("</td>");
+            contenidoHTML.append("<td style=\"text-align: center;\">").append(marca.get(i)).append("</td>");
+            contenidoHTML.append("<td style=\"text-align: center;\">").append(n_unidades.get(i)).append("</td>");
+            contenidoHTML.append("</table>");
+            contenidoHTML.append("<hr style=\"width: 30ch; border: none; border-top: 1px solid black;\">");
+
+            contenidoHTML.append("<p>Subtotal de pago: S/").append(df.format(suma_subtotal)).append("</p>");
+            contenidoHTML.append("<p>IGV de la compra: S/").append(df.format(suma_subtotal * 0.18)).append("</p>");
+            contenidoHTML.append("<p>Descuento por la compra: S/").append(descuento()).append("</p>");
+            contenidoHTML.append("<p>Monto final a pagar: S/").append(df.format((suma_subtotal + IGV()) - descuento())).append("</p>");
+            contenidoHTML.append("<p>Fecha de Emisión: ").append(LocalDate.now().format(formatoFecha)).append("</p>");
+            contenidoHTML.append("</body></html>");
+            String rutaDelArchivo = System.getProperty("java.io.tmpdir") + "\\ReporteCompra.html";
+            try (PrintWriter out = new PrintWriter(rutaDelArchivo)) {
+                out.println(contenidoHTML);
+                System.out.println("Informe HTML generado y guardado en: " + rutaDelArchivo);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
     }//GEN-LAST:event_jbtnGENERAR_BOLETAActionPerformed
-
+    }
+    
     private void jbtnSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSALIRActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jbtnSALIRActionPerformed

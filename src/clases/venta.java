@@ -10,14 +10,16 @@ public class venta extends producto {
     }
 
     public int getId_venta() {
-        return id_venta;
+        return 19758465;
     }
 
     public void setId_venta(int id_venta) {
         this.id_venta = id_venta;
     }
-    public void reporte_venta(){
+    public String reporte_venta(){
         String cadena="";
-        
+        cadena+="Id de venta: "+getId_venta()+"\n";
+        cadena+="Producto\tPrecio\tN° unidades\t\n";
+        return cadena;
     }
 }

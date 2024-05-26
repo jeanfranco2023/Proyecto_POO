@@ -179,7 +179,7 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuarios = jtxtUSUARIO.getText();
         String pas = new String(jpsPASSWORD.getPassword());
-        vendedor ven = new vendedor(usuarios, ERROR, HAND_CURSOR, ERROR, usuarios, pas, ERROR, WIDTH, WIDTH, usuarios, ERROR, WIDTH, pas);
+        vendedor ven = new vendedor(usuarios, ERROR, HAND_CURSOR, ERROR, usuarios, pas, pas, ERROR, WIDTH, WIDTH, usuarios, ERROR, WIDTH, pas);
         ArrayList<String> usuario = new ArrayList<>();
         usuario.addAll(ven.getUsuario());
         ArrayList<String> contraseña = new ArrayList<>();

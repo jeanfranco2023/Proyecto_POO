@@ -53,8 +53,8 @@ public class producto {
             case "Polos":
                 precio = 60.9;
                 break;
-            case "Pantalones":
-                precio = 160.9;
+            case "Pantalon":
+                precio = 120.9;
                 break;
             case "Casacas":
                 precio = 98.9;

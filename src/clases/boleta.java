@@ -20,7 +20,7 @@ public class boleta extends venta {
     }
 
     public double calcular() {
-        double x;
+        double x; 
         x = getUnidades() *getPrecio() ;
         return x;
     }
@@ -33,9 +33,10 @@ public class boleta extends venta {
         return calcular() + IGV();
     }
 
-    public void generar_factura() {
+    public String emitir_factura() {
         String cadena="";
-        
+        cadena+="Ruc: "+getRuc()+"\n"+reporte_venta();
+        return cadena;
     }
 
 }

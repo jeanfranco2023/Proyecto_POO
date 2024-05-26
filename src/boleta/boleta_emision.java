@@ -4,10 +4,15 @@
  */
 package boleta;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMoonlightIJTheme;
+import clases.producto;
+import clases.vendedor;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.UIManager;
+import venta.registro_de_venta;
 
 /**
  *
@@ -18,9 +23,27 @@ public class boleta_emision extends javax.swing.JFrame {
     /**
      * Creates new form boleta_emision
      */
-    public boleta_emision() {
+    private String nombre_cliente;
+    private int DNI_cliente;
+    private int telefono_cliente;
+    private ArrayList<Object> nombre_producto;
+    private ArrayList<Object> marca_producto;
+    private ArrayList<Object> n_unidades_producto;
+    private ArrayList<Object> subtotal_producto;
+    protected double suma_subtotal = 0;
+    vendedor v = new vendedor(nombre_cliente, ERROR, HAND_CURSOR, DNI_cliente, nombre_cliente, nombre_cliente, nombre_cliente, ERROR, WIDTH, WIDTH, nombre_cliente, ERROR, WIDTH, nombre_cliente);
+
+    public boleta_emision(String nombre, int DNI, int telefono, ArrayList<Object> producto, ArrayList<Object> marca, ArrayList<Object> n_unidades, ArrayList<Object> subtotal) {
         initComponents();
         this.setLocationRelativeTo(null);
+        nombre_cliente = nombre;
+        DNI_cliente = DNI;
+        telefono_cliente = telefono;
+        nombre_producto = producto;
+        marca_producto = marca;
+        n_unidades_producto = n_unidades;
+        subtotal_producto = subtotal;
+
     }
 
     /**
@@ -34,25 +57,41 @@ public class boleta_emision extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jtxaPANEL = new javax.swing.JTextArea();
+        jbtnEMITIRHTML = new javax.swing.JButton();
+        jbtnGENERAR_BOLETA = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(453, 504));
 
         jPanel1.setLayout(null);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jtxaPANEL.setColumns(20);
+        jtxaPANEL.setRows(5);
+        jScrollPane1.setViewportView(jtxaPANEL);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(20, 20, 410, 420);
 
-        jButton1.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
-        jButton1.setText("Emitir pdf");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(140, 450, 160, 40);
+        jbtnEMITIRHTML.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
+        jbtnEMITIRHTML.setText("Emitir pdf");
+        jbtnEMITIRHTML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEMITIRHTMLActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnEMITIRHTML);
+        jbtnEMITIRHTML.setBounds(250, 450, 160, 40);
+
+        jbtnGENERAR_BOLETA.setFont(new java.awt.Font("Lucida Sans", 1, 16)); // NOI18N
+        jbtnGENERAR_BOLETA.setText("Generar boleta");
+        jbtnGENERAR_BOLETA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGENERAR_BOLETAActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnGENERAR_BOLETA);
+        jbtnGENERAR_BOLETA.setBounds(40, 450, 180, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,14 +107,85 @@ public class boleta_emision extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtnGENERAR_BOLETAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGENERAR_BOLETAActionPerformed
+        // TODO add your handling code here:
+        String cadena = "";
+        for (Object subtotal_precio : subtotal_producto) {
+            if (subtotal_precio instanceof Number) {
+                suma_subtotal += ((Number) subtotal_precio).doubleValue();
+            }
+        }
+        jtxaPANEL.append("" + v.generar_factura());
+    }//GEN-LAST:event_jbtnGENERAR_BOLETAActionPerformed
+    protected double IGV() {
+        return suma_subtotal * 0.18;
+    }
+
+    protected double descuento() {
+        double descuento;
+        if (suma_subtotal < 500) {
+            descuento = 40;
+        } else if (suma_subtotal < 1000) {
+            descuento = 80;
+        } else {
+            descuento = 150;
+        }
+        return descuento;
+    }
+
+    private void jbtnEMITIRHTMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEMITIRHTMLActionPerformed
+        // TODO add your handling code here:
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        StringBuilder contenidoHTML = new StringBuilder();
+        contenidoHTML.append("<html><head><style>body {text-align: center;}</style><title>REPORTE DE FACTURA</title></head><body>");
+        contenidoHTML.append("<h1>REPORTE DE BOLETA</h1>");
+        contenidoHTML.append("<h1>IMPORTADORA EXPRESS</h1>");
+        contenidoHTML.append("<img src=\"file:///C:/Users//PC//OneDrive - Universidad Tecnologica del Peru//4 ciclo//POO//IMAGENES_PROYECTO//IMPORTADORA_EXPRESS.png\" alt=\"Foto del logo\" width=\"200\" height=\"200\">");
+        contenidoHTML.append("<p>Id de la compra: ").append(v.getId_venta()).append("</p>");
+        contenidoHTML.append("<p>Nombre del trabajador: ").append(v.getNombre_vendedor()).append("</p>");
+        contenidoHTML.append("<p>DNI del trabajador: ").append(v.getDNI_vendedor()).append("</p>");
+        contenidoHTML.append("<p>Código del trabajador: ").append(v.getId_vendedor()).append("</p>");
+        contenidoHTML.append("<p>Nombre del cliente: ").append(nombre_cliente).append(" ").append("</p>");
+        contenidoHTML.append("<p>Número de DNI del cliente: ").append(DNI_cliente).append("</p>");
+        contenidoHTML.append("<p>Detalle de la compra:</p>");
+        contenidoHTML.append("<table border=\"1\" align=\"center\">");
+        contenidoHTML.append("<tr><th>Nombre del Producto</th><th>Marca</th><th>Cantidad</th></tr>");
+
+        for (int i = 0; i < nombre_producto.size(); i++) {
+    contenidoHTML.append("<tr><td>").append(nombre_producto.get(i)).append("</td>");
+    contenidoHTML.append("<td>").append(marca_producto.get(i)).append("</td>");
+    contenidoHTML.append("<td>").append(n_unidades_producto.get(i)).append("</td></tr>");
+}
+
+        contenidoHTML.append("</table>");
+        contenidoHTML.append("<p>Subtotal de pago: S/").append(suma_subtotal).append("</p>");
+        contenidoHTML.append("<p>IGV de la compra: S/").append(suma_subtotal * 0.18).append("</p>");
+        contenidoHTML.append("<p>Descuento por la compra: S/").append(descuento()).append("</p>");
+        contenidoHTML.append("<p>Monto final a pagar: S/").append((suma_subtotal - IGV()) - descuento()).append("</p>");
+        contenidoHTML.append("<p>Fecha de Emisión: ").append(LocalDate.now().format(formatoFecha)).append("</p>");
+        contenidoHTML.append("<h1>FIN DEL REPORTE</h1>");
+        contenidoHTML.append("</body></html>");
+        contenidoHTML.append("<footer><p>El registro efectuado es puramente con fines de prueba y ejecución.</p></footer>");
+        contenidoHTML.append("</body></html>");
+        String rutaDelArchivo = System.getProperty("java.io.tmpdir") + "\\ReporteCompra.html";
+        try (PrintWriter out = new PrintWriter(rutaDelArchivo)) {
+            out.println(contenidoHTML);
+            System.out.println("Informe HTML generado y guardado en: " + rutaDelArchivo);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jbtnEMITIRHTMLActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton jbtnEMITIRHTML;
+    private javax.swing.JButton jbtnGENERAR_BOLETA;
+    private javax.swing.JTextArea jtxaPANEL;
     // End of variables declaration//GEN-END:variables
+
 }

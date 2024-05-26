@@ -125,7 +125,7 @@ public class contraseña_recuperar extends javax.swing.JFrame {
         // TODO add your handling code here:
         String correo = jtxtCORREO.getText();
         String usuario = jtxtUSUARIO.getText();
-        clases.vendedor ven = new clases.vendedor(correo, ERROR, HAND_CURSOR, ERROR, usuario, correo, ERROR, WIDTH, WIDTH, correo, ERROR, WIDTH, usuario);
+        clases.vendedor ven = new clases.vendedor(correo, ERROR, HAND_CURSOR, ERROR, usuario, correo, correo, ERROR, WIDTH, WIDTH, correo, ERROR, WIDTH, usuario);
         if (ven.getUsuario().contains(usuario) && ven.getCorreo().equals(correo)) {
             JOptionPane.showMessageDialog(null, "Su cotraseña es: " + ven.getContraseña());
             login.login inicio = new login.login();

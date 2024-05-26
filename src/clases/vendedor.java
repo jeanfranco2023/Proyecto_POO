@@ -13,7 +13,7 @@ public class vendedor extends boleta {
     private String contraseña;
     protected String correo;
 
-    public vendedor(String nombre_vendedor, int id_vendedor, int edad_vendedor, int DNI_vendedor, String usuario, String contraseña, int ruc, int id_venta, int id_producto, String nombre_producto, double precio, int cantidad, String marca) {
+    public vendedor(String nombre_vendedor, int id_vendedor, int edad_vendedor, int DNI_vendedor, String usuario, String contraseña, String correo, int ruc, int id_venta, int id_producto, String nombre_producto, double precio, int cantidad, String marca) {
         super(ruc, id_venta, id_producto, nombre_producto, precio, cantidad, marca);
         this.nombre_vendedor = nombre_vendedor;
         this.id_vendedor = id_vendedor;
@@ -21,9 +21,14 @@ public class vendedor extends boleta {
         this.DNI_vendedor = DNI_vendedor;
         this.usuario = usuario;
         this.contraseña = contraseña;
+        this.correo = correo;
     }
 
-    protected String getNombre_vendedor() {
+    
+
+    
+
+    public String getNombre_vendedor() {
         return "Pedro Martinez";
     }
 
@@ -31,7 +36,7 @@ public class vendedor extends boleta {
         this.nombre_vendedor = nombre_vendedor;
     }
 
-    protected int getId_vendedor() {
+    public int getId_vendedor() {
         return 11789685;
     }
 
@@ -47,7 +52,7 @@ public class vendedor extends boleta {
         this.edad_vendedor = edad_vendedor;
     }
 
-    private int getDNI_vendedor() {
+    public int getDNI_vendedor() {
         return 74859465;
     }
 
@@ -119,11 +124,10 @@ public class vendedor extends boleta {
         this.correo = correo;
     }
 
-    public void emitir_factura() {
+    public String generar_factura() {
         String cadena = "";
-        cadena += "Nombre del trabajador: " + getNombre_vendedor() + "\n"
-                + "ID del trabajador: " + getId_vendedor();
-        generar_factura();
-
+        cadena += ("Nombre del trabajador: " + getNombre_vendedor() + "\n"
+                + "ID del trabajador: " + getId_vendedor()+"\n"+ emitir_factura());
+        return cadena;
     }
 }
