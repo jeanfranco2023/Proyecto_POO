@@ -5,18 +5,14 @@
 package venta;
 
 import clases.vendedor;
-import com.formdev.flatlaf.FlatLightLaf;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.UIManager;
-
 /**
  *
  * @author PC
@@ -353,7 +349,7 @@ public class registro_de_venta extends javax.swing.JFrame {
         contenidoHTML.append("<p>DNI del trabajador: ").append(v.getDNI_vendedor()).append("</p>");
         contenidoHTML.append("<p>Código del trabajador: ").append(v.getId_vendedor()).append("</p>");
         contenidoHTML.append("<p>Nombre del cliente: ").append(nombre).append(" ").append("</p>");
-        contenidoHTML.append("<p>Número de DNI del cliente: ").append(DNI).append("</p>");
+        contenidoHTML.append("<p>DNI del cliente: ").append(DNI).append("</p>");
         contenidoHTML.append("<p>Detalle de la compra:</p>");
 
         contenidoHTML.append("<table style=\"width: 30ch; border-collapse: collapse; margin: auto;\">");
@@ -361,28 +357,30 @@ public class registro_de_venta extends javax.swing.JFrame {
 
         for (int i = 0; i < producto.size(); i++) {
             contenidoHTML.append("<tr>");
-            contenidoHTML.append("<td style=\"text-align: center;\">").append(producto.get(i)).append("</td>");
-            contenidoHTML.append("<td style=\"text-align: center;\">").append(marca.get(i)).append("</td>");
-            contenidoHTML.append("<td style=\"text-align: center;\">").append(n_unidades.get(i)).append("</td>");
-            contenidoHTML.append("</table>");
-            contenidoHTML.append("<hr style=\"width: 30ch; border: none; border-top: 1px solid black;\">");
+            contenidoHTML.append("<td style=\"text-align: center; width: 30ch;\">").append(producto.get(i)).append("</td>");
+            contenidoHTML.append("<td style=\"text-align: center; width: 30ch;\">").append(marca.get(i)).append("</td>");
+            contenidoHTML.append("<td style=\"text-align: center; width: 30ch;\">").append(n_unidades.get(i)).append("</td>");
+            contenidoHTML.append("</tr>");
+        }
 
-            contenidoHTML.append("<p>Subtotal de pago: S/").append(df.format(suma_subtotal)).append("</p>");
-            contenidoHTML.append("<p>IGV de la compra: S/").append(df.format(suma_subtotal * 0.18)).append("</p>");
-            contenidoHTML.append("<p>Descuento por la compra: S/").append(descuento()).append("</p>");
-            contenidoHTML.append("<p>Monto final a pagar: S/").append(df.format((suma_subtotal + IGV()) - descuento())).append("</p>");
-            contenidoHTML.append("<p>Fecha de Emisión: ").append(LocalDate.now().format(formatoFecha)).append("</p>");
-            contenidoHTML.append("</body></html>");
-            String rutaDelArchivo = System.getProperty("java.io.tmpdir") + "\\ReporteCompra.html";
-            try (PrintWriter out = new PrintWriter(rutaDelArchivo)) {
-                out.println(contenidoHTML);
-                System.out.println("Informe HTML generado y guardado en: " + rutaDelArchivo);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        contenidoHTML.append("</table>");
+        contenidoHTML.append("<hr style=\"width: 30ch; border: none; border-top: 1px solid black;\">");
+
+        contenidoHTML.append("<p>Subtotal de pago: S/").append(df.format(suma_subtotal)).append("</p>");
+        contenidoHTML.append("<p>IGV de la compra: S/").append(df.format(suma_subtotal * 0.18)).append("</p>");
+        contenidoHTML.append("<p>Descuento por la compra: S/").append(descuento()).append("</p>");
+        contenidoHTML.append("<p>Monto final a pagar: S/").append(df.format((suma_subtotal + IGV()) - descuento())).append("</p>");
+        contenidoHTML.append("<p>Fecha de Emisión: ").append(LocalDate.now().format(formatoFecha)).append("</p>");
+        contenidoHTML.append("</body></html>");
+        String rutaDelArchivo = System.getProperty("java.io.tmpdir") + "\\ReporteCompra.html";
+        try (PrintWriter out = new PrintWriter(rutaDelArchivo)) {
+            out.println(contenidoHTML);
+            System.out.println("Informe HTML generado y guardado en: " + rutaDelArchivo);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jbtnGENERAR_BOLETAActionPerformed
-    }
-    
+
     private void jbtnSALIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSALIRActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jbtnSALIRActionPerformed
